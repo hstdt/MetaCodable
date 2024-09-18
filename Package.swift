@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 
 import Foundation
 import PackageDescription
@@ -19,11 +19,11 @@ let package = Package(
         .plugin(name: "MetaProtocolCodable", targets: ["MetaProtocolCodable"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-syntax.git", from: "510.0.2"),
-        .package(url: "https://github.com/apple/swift-collections.git", from: "1.0.4"),
-        .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.2.2"),
-        .package(url: "https://github.com/apple/swift-format", from: "509.0.0"),
-        .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
+        .package(url: "https://github.com/apple/swift-syntax", "600.0.0"..<"999.0.0"),
+        .package(url: "https://github.com/apple/swift-collections", "1.1.3"..<"99.0.0"),
+        .package(url: "https://github.com/apple/swift-argument-parser", "1.5.0"..<"99.0.0"),
+        .package(url: "https://github.com/apple/swift-format", "600.0.0"..<"999.0.0"),
+        .package(url: "https://github.com/apple/swift-docc-plugin", "1.4.3"..<"99.0.0"),
     ],
     targets: [
         // MARK: Core
@@ -103,22 +103,22 @@ if Context.environment["METACODABLE_CI"] == nil {
     }
 }
 
-if Context.environment["SWIFT_SYNTAX_EXTENSION_MACRO_FIXED"] != nil {
-    package.dependencies.removeAll { $0.kind.repoName == "swift-syntax" }
-    package.dependencies.append(
-        .package(
-            url: "https://github.com/soumyamahunt/swift-syntax.git",
-            branch: "extension-macro-assert-fix"
-        )
-    )
-
-    package.targets.forEach { target in
-        guard target.isTest else { return }
-        var settings = target.swiftSettings ?? []
-        settings.append(.define("SWIFT_SYNTAX_EXTENSION_MACRO_FIXED"))
-        target.swiftSettings = settings
-    }
-}
+// if Context.environment["SWIFT_SYNTAX_EXTENSION_MACRO_FIXED"] != nil {
+    // package.dependencies.removeAll { $0.kind.repoName == "swift-syntax" }
+    // package.dependencies.append(
+    //     .package(
+    //         url: "https://github.com/soumyamahunt/swift-syntax.git",
+    //         branch: "extension-macro-assert-fix"
+    //     )
+    // )
+    // 
+    // package.targets.forEach { target in
+    //     guard target.isTest else { return }
+    //     var settings = target.swiftSettings ?? []
+    //     settings.append(.define("SWIFT_SYNTAX_EXTENSION_MACRO_FIXED"))
+    //     target.swiftSettings = settings
+    // }
+// }
 
 if Context.environment["METACODABLE_BEING_USED_FROM_COCOAPODS"] != nil {
     includeTargets.append(contentsOf: ["PluginCore", "MacroPlugin"])
