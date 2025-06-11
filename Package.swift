@@ -20,10 +20,11 @@ let package = Package(
         .plugin(name: "MetaProtocolCodable", targets: ["MetaProtocolCodable"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/swiftlang/swift-syntax.git", "509.1.0"..<"602.0.0"),
-        .package(url: "https://github.com/apple/swift-collections.git", from: "1.0.4"),
-        .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.2.2"),
-        .package(url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.0.0"),
+        .package(url: "https://github.com/apple/swift-syntax", "601.0.0"..<"999.0.0"),
+        .package(url: "https://github.com/apple/swift-collections", "1.1.3"..<"99.0.0"),
+        .package(url: "https://github.com/apple/swift-argument-parser", "1.5.0"..<"99.0.0"),
+        .package(url: "https://github.com/apple/swift-format", "601.0.0"..<"999.0.0"),
+        .package(url: "https://github.com/apple/swift-docc-plugin", "1.4.3"..<"99.0.0"),
     ],
     targets: [
         // MARK: Core
